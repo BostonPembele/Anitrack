@@ -1,13 +1,112 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>detail</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ anime?.title ?? 'Loading...' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  @if(isLoading) {
+    <div style="display:flex; justify-content:center; padding:40px">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  }
+
+  @if(anime && !isLoading) {
+
+    <div class="hero">
+      <img [src]="anime.images.jpg.large_image_url" [alt]="anime.title" class="hero-image"/>
+      <div class="hero-overlay">
+        <h1 class="hero-title">{{ anime.title }}</h1>
+        <div class="hero-badges">
+          <ion-badge color="warning">⭐ {{ anime.score ?? 'N/A' }}</ion-badge>
+          <ion-badge color="primary">{{ anime.type }}</ion-badge>
+          <ion-badge color="success">{{ anime.status }}</ion-badge>
+        </div>
+      </div>
+    </div>
+
+    <ion-card class="action-card">
+      <ion-card-content>
+        @if(!isInWatchlist) {
+          <ion-select
+            [(ngModel)]="selectedStatus"
+            label="Status"
+            fill="outline">
+            <ion-select-option value="planned">Plan to Watch</ion-select-option>
+            <ion-select-option value="watching">Watching</ion-select-option>
+            <ion-select-option value="completed">Completed</ion-select-option>
+          </ion-select>
+        }
+        <ion-button expand="block" (click)="toggleWatchlist()"
+          [color]="isInWatchlist ? 'danger' : 'primary'"
+          style="margin-top:10px">
+          <ion-icon slot="start" [name]="isInWatchlist ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+          {{ isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Episodes</span>
+            <span class="info-value">{{ anime.episodes ?? 'N/A' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Duration</span>
+            <span class="info-value">{{ anime.duration }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Rating</span>
+            <span class="info-value">{{ anime.rating }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Rank</span>
+            <span class="info-value">#{{ anime.rank }}</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <h2>Synopsis</h2>
+        <p>{{ anime.synopsis }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <h2>Genres</h2>
+        <div class="genre-list">
+          @for(genre of anime.genres; track genre.mal_id) {
+            <ion-badge color="tertiary">{{ genre.name }}</ion-badge>
+          }
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    @if(characters.length > 0) {
+      <ion-card>
+        <ion-card-content>
+          <h2>Characters</h2>
+          <div class="character-grid">
+            @for(char of characters; track char.character.mal_id) {
+              <div class="character-item">
+                <img [src]="char.character.images.jpg.image_url" [alt]="char.character.name"/>
+                <span>{{ char.character.name }}</span>
+              </div>
+            }
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+
+  }
+
 </ion-content>
