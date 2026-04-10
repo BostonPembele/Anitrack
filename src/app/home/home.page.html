@@ -1,20 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>AniTrack</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-searchbar
+    placeholder="Search anime..."
+    [(ngModel)]="searchQuery"
+    (ionInput)="onSearchChange($event)"
+    debounce="500">
+  </ion-searchbar>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div *ngIf="isLoading" style="display:flex; justify-content:center; padding:40px">
+    <ion-spinner name="crescent"></ion-spinner>
   </div>
+
+  <ng-container *ngIf="searchResults.length > 0">
+    <h2 style="padding: 0 16px">Search Results</h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let anime of searchResults">
+          <ion-card (click)="goToDetail(anime.mal_id)">
+            <img [src]="anime.images.jpg.image_url" [alt]="anime.title"
+              style="width:100%; height:200px; object-fit:cover"/>
+            <ion-card-header>
+              <ion-card-title style="font-size:14px">{{ anime.title }}</ion-card-title>
+              <ion-card-subtitle>
+                <ion-badge color="warning">⭐ {{ anime.score ?? 'N/A' }}</ion-badge>
+              </ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+
+  <ng-container *ngIf="searchResults.length === 0 && !isLoading">
+    <h2 style="padding: 0 16px">Top Anime</h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let anime of topAnime">
+          <ion-card (click)="goToDetail(anime.mal_id)">
+            <img [src]="anime.images.jpg.image_url" [alt]="anime.title"
+              style="width:100%; height:200px; object-fit:cover"/>
+            <ion-card-header>
+              <ion-card-title style="font-size:14px">{{ anime.title }}</ion-card-title>
+              <ion-card-subtitle>
+                <ion-badge color="warning">⭐ {{ anime.score ?? 'N/A' }}</ion-badge>
+              </ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
 </ion-content>
