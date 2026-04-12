@@ -1,13 +1,63 @@
 <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>My Watchlist</ion-title>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>watchlist</ion-title>
+    <ion-segment
+      [value]="selectedSegment"
+      (ionChange)="onSegmentChange($event)">
+      <ion-segment-button value="watching">
+        <ion-label>Watching ({{ watchingList.length }})</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="planned">
+        <ion-label>Planned ({{ plannedList.length }})</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-label>Completed ({{ completedList.length }})</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">watchlist</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  @if(displayedList.length === 0) {
+    <div style="display:flex; flex-direction:column; align-items:center; padding:60px 20px">
+      <ion-icon name="bookmark-outline" style="font-size:64px; color:var(--ion-color-medium)"></ion-icon>
+      <p style="color:var(--ion-color-medium); margin-top:16px">Nothing here yet</p>
+    </div>
+  }
+
+  @for(anime of displayedList; track anime.malId) {
+    <ion-item-sliding>
+      <ion-item lines="none">
+        <ion-card (click)="goToDetail(anime.malId)" style="width:100%; margin:6px 0">
+          <div style="display:flex; align-items:center; padding:8px">
+            <img [src]="anime.imageUrl" [alt]="anime.title"
+              style="width:70px; height:100px; object-fit:cover; border-radius:8px"/>
+            <ion-card-header style="flex:1">
+              <ion-card-title style="font-size:15px">{{ anime.title }}</ion-card-title>
+              <ion-card-subtitle>
+                <ion-badge color="warning">⭐ {{ anime.score ?? 'N/A' }}</ion-badge>
+                <ion-badge
+                  [color]="anime.status === 'watching' ? 'primary' : anime.status === 'completed' ? 'success' : 'warning'"
+                  style="margin-left:6px">
+                  {{ anime.status }}
+                </ion-badge>
+              </ion-card-subtitle>
+              <p style="font-size:12px; color:var(--ion-color-medium); margin-top:4px">
+                {{ anime.episodes }} episodes
+              </p>
+            </ion-card-header>
+          </div>
+        </ion-card>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeAnime(anime.malId)">
+          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  }
+
 </ion-content>
