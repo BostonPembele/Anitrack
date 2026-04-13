@@ -236,19 +236,6 @@ Tap **Profile** in the bottom navigation bar to see:
 
 ---
 
-## Commit History Convention
-
-All commits in this project follow the Conventional Commits standard:
-
-| Prefix | Meaning |
-|---|---|
-| `feat:` | A new feature was added |
-| `fix:` | A bug was fixed |
-| `style:` | UI or styling changes only |
-| `refactor:` | Code was restructured without changing behaviour |
-| `docs:` | Documentation was updated |
-
----
 
 ## License
 
