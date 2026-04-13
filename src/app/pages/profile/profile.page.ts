@@ -1,20 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { StorageService } from 'src/app/services/storage';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonCard, IonCardContent, IonCardHeader,
+  IonCardTitle, IonIcon, IonLabel
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import {
+  tvOutline, bookmarkOutline, checkmarkCircleOutline,
+  timeOutline, statsChartOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonCard, IonCardContent, IonCardHeader,
+    IonCardTitle, IonIcon, IonLabel
+  ]
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  stats = {
+    total: 0,
+    watching: 0,
+    planned: 0,
+    completed: 0,
+    episodesWatched: 0
+  };
 
-  ngOnInit() {
+  constructor(private storageService: StorageService) {
+    addIcons({
+      tvOutline, bookmarkOutline, checkmarkCircleOutline,
+      timeOutline, statsChartOutline
+    });
   }
 
+  ngOnInit() {
+    this.loadStats();
+  }
+
+  ionViewWillEnter() {
+    this.loadStats();
+  }
+
+  async loadStats() {
+    this.stats = await this.storageService.getStats();
+  }
 }
