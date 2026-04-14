@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "AniTrack",
+  "short_name": "AniTrack",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
