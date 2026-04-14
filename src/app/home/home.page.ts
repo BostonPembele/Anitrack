@@ -30,7 +30,10 @@ export class HomePage implements OnInit {
   isLoading: boolean = true;
   isSearching: boolean = false;
 
-  constructor(private animeService: AnimeService, private router: Router) {}
+  constructor(
+    private animeService: AnimeService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadTopAnime();
@@ -38,33 +41,37 @@ export class HomePage implements OnInit {
 
   loadTopAnime() {
     this.isLoading = true;
-    this.animeService.getTopAnime().subscribe({
-      next: (response) => {
+
+    this.animeService.getTopAnime().subscribe(
+      (response) => {
         this.topAnime = response.data;
         this.isLoading = false;
       },
-      error: () => {
+      () => {
         this.isLoading = false;
       }
-    });
+    );
   }
 
   onSearchChange(event: any) {
     const query = event.detail.value;
-    if (query && query.length > 2) {
-      this.isSearching = true;
-      this.animeService.searchAnime(query).subscribe({
-        next: (response) => {
-          this.searchResults = response.data;
-          this.isSearching = false;
-        },
-        error: () => {
-          this.isSearching = false;
-        }
-      });
-    } else {
+
+    if (!query || query.length <= 2) {
       this.searchResults = [];
+      return;
     }
+
+    this.isSearching = true;
+
+    this.animeService.searchAnime(query).subscribe(
+      (response) => {
+        this.searchResults = response.data;
+        this.isSearching = false;
+      },
+      () => {
+        this.isSearching = false;
+      }
+    );
   }
 
   goToDetail(id: number) {

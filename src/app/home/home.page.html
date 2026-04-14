@@ -13,50 +13,80 @@
     debounce="500">
   </ion-searchbar>
 
-  <div *ngIf="isLoading" style="display:flex; justify-content:center; padding:40px">
+  <div *ngIf="isLoading" class="loading-container">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
   @if(searchResults.length > 0) {
-    <h2 style="padding: 0 16px">Search Results</h2>
+    <h2 class="section-title">Search Results</h2>
+
     <ion-grid>
       <ion-row>
+
         @for(anime of searchResults; track anime.mal_id) {
           <ion-col size="6">
-            <ion-card (click)="goToDetail(anime.mal_id)">
-              <img [src]="anime.images.jpg.image_url" [alt]="anime.title"
-                style="width:100%; height:200px; object-fit:cover"/>
+            <ion-card class="anime-card" (click)="goToDetail(anime.mal_id)">
+
+              <img
+                [src]="anime.images.jpg.image_url"
+                [alt]="anime.title"
+                class="anime-image"
+              />
+
               <ion-card-header>
-                <ion-card-title style="font-size:14px">{{ anime.title }}</ion-card-title>
+                <ion-card-title class="anime-title">
+                  {{ anime.title }}
+                </ion-card-title>
+
                 <ion-card-subtitle>
-                  <ion-badge color="warning">⭐ {{ anime.score ?? 'N/A' }}</ion-badge>
+                  <ion-badge color="warning">
+                    ⭐ {{ anime.score ?? 'N/A' }}
+                  </ion-badge>
                 </ion-card-subtitle>
+
               </ion-card-header>
+
             </ion-card>
           </ion-col>
         }
+
       </ion-row>
     </ion-grid>
   }
 
   @if(searchResults.length === 0 && !isLoading) {
-    <h2 style="padding: 0 16px">Top Anime</h2>
+    <h2 class="section-title">Top Anime</h2>
+
     <ion-grid>
       <ion-row>
+
         @for(anime of topAnime; track anime.mal_id) {
           <ion-col size="6">
-            <ion-card (click)="goToDetail(anime.mal_id)">
-              <img [src]="anime.images.jpg.image_url" [alt]="anime.title"
-                style="width:100%; height:200px; object-fit:cover"/>
+            <ion-card class="anime-card" (click)="goToDetail(anime.mal_id)">
+
+              <img
+                [src]="anime.images.jpg.image_url"
+                [alt]="anime.title"
+                class="anime-image"
+              />
+
               <ion-card-header>
-                <ion-card-title style="font-size:14px">{{ anime.title }}</ion-card-title>
+                <ion-card-title class="anime-title">
+                  {{ anime.title }}
+                </ion-card-title>
+
                 <ion-card-subtitle>
-                  <ion-badge color="warning">⭐ {{ anime.score ?? 'N/A' }}</ion-badge>
+                  <ion-badge color="warning">
+                    ⭐ {{ anime.score ?? 'N/A' }}
+                  </ion-badge>
                 </ion-card-subtitle>
+
               </ion-card-header>
+
             </ion-card>
           </ion-col>
         }
+
       </ion-row>
     </ion-grid>
   }
