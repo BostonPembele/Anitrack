@@ -53,6 +53,7 @@ export class DetailPage implements OnInit {
       next: async (response) => {
         this.anime = response.data;
         this.isLoading = false;
+
         this.isInWatchlist = await this.storageService.isInWatchlist(id);
         this.loadCharacters(id);
       },
@@ -66,8 +67,7 @@ export class DetailPage implements OnInit {
     this.animeService.getAnimeCharacters(id).subscribe({
       next: (response) => {
         this.characters = response.data.slice(0, 6);
-      },
-      error: () => {}
+      }
     });
   }
 
@@ -85,6 +85,7 @@ export class DetailPage implements OnInit {
         status: this.selectedStatus,
         userRating: 0
       };
+
       await this.storageService.addToWatchlist(entry);
       this.isInWatchlist = true;
     }
