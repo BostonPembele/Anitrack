@@ -1,2 +1,42 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  --ion-color-primary: #7B2FBE;
+  --ion-color-primary-rgb: 123,47,190;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #6c29a7;
+  --ion-color-primary-tint: #8844c5;
+
+  --ion-color-secondary: #C353E0;
+  --ion-color-secondary-rgb: 195,83,224;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255,255,255;
+  --ion-color-secondary-shade: #ac49c5;
+  --ion-color-secondary-tint: #c964e3;
+
+  --ion-color-tertiary: #5B4FE8;
+  --ion-color-tertiary-rgb: 91,79,232;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-shade: #5046cc;
+  --ion-color-tertiary-tint: #6b61ea;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-warning: #ffc409;
+  --ion-color-danger: #eb445a;
+  --ion-color-medium: #6B7280;
+  --ion-color-light: #1e1b2e;
+
+  --ion-font-family: 'Inter', sans-serif;
+  --ion-background-color: #0d0d1a;
+  --ion-text-color: #e2e8f0;
+
+  --ion-card-background: #13112a;
+  --ion-toolbar-background: #0d0d1a;
+  --ion-tab-bar-background: #0d0d1a;
+  --ion-tab-bar-border-color: rgba(123,47,190,0.3);
+  --ion-tab-bar-color: #6B7280;
+  --ion-tab-bar-color-selected: #C353E0;
+  --ion-item-background: #13112a;
+}

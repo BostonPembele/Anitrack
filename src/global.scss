@@ -35,3 +35,119 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+ion-content {
+  --background: #0d0d1a;
+}
+
+ion-card {
+  border-radius: 16px !important;
+  background: #13112a !important;
+  border: 1px solid rgba(123,47,190,0.25) !important;
+  box-shadow: 0 4px 24px rgba(123,47,190,0.15) !important;
+}
+
+ion-toolbar {
+  --background: #0d0d1a;
+  --color: #e2e8f0;
+  --border-color: rgba(123,47,190,0.3);
+}
+
+ion-title {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #7B2FBE, #C353E0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+ion-tab-bar {
+  border-top: 1px solid rgba(123,47,190,0.3);
+  padding: 4px 0;
+  height: 60px;
+  background: #0d0d1a;
+}
+
+ion-tab-button {
+  --color: #6B7280;
+  --color-selected: #C353E0;
+  background: #0d0d1a;
+}
+
+ion-searchbar {
+  --background: #13112a;
+  --color: #e2e8f0;
+  --placeholder-color: #6B7280;
+  --icon-color: #7B2FBE;
+  --border-radius: 12px;
+  --box-shadow: 0 0 0 1px rgba(123,47,190,0.3);
+  padding: 12px 16px !important;
+}
+
+ion-segment {
+  --background: #13112a;
+}
+
+ion-segment-button {
+  --color: #6B7280;
+  --color-checked: #C353E0;
+  --indicator-color: #7B2FBE;
+  font-size: 12px;
+}
+
+ion-badge {
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+}
+
+ion-card-title {
+  color: #e2e8f0 !important;
+  font-weight: 600 !important;
+}
+
+ion-card-subtitle {
+  margin-top: 6px !important;
+}
+
+ion-item {
+  --background: #13112a;
+  --color: #e2e8f0;
+  --border-color: rgba(123,47,190,0.2);
+}
+
+ion-label {
+  color: #e2e8f0 !important;
+}
+
+h2 {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+ion-button {
+  --border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+ion-back-button {
+  --color: #C353E0;
+}
+
+ion-spinner {
+  color: #7B2FBE;
+}
+
+ion-select {
+  --placeholder-color: #6B7280;
+  color: #e2e8f0;
+}
