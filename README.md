@@ -69,6 +69,7 @@ AniTrack has 4 main features:
 
 ## Link to App
 
+Please refresh after clicking the link.
 https://anitrack-c819b.web.app/home
 
 ## How to run it
