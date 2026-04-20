@@ -67,8 +67,14 @@ AniTrack has 4 main features:
 
 ---
 
+## Link to App
+
+https://anitrack-c819b.web.app/home
+
 ## How to run it
 
 ```bash
 npm install
 ionic serve
+
+
