@@ -64,6 +64,7 @@ AniTrack has 4 main features:
 - HttpClient (API calls)
 - Ionic Storage (saving watchlist)
 - Capacitor Share (native sharing)
+- Firebase Hosting (Live app)
 
 ---
 
